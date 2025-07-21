@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Aset extends Model
 {
     protected $table = 'aset';
-    protected $fillable = ['nama_aset', 'id_lokasi', 'id_kategori', 'kode_aset', 'tanggal_perolehan'];
+    protected $fillable = [
+        'nama_aset',
+        'id_lokasi',
+        'id_kategori',
+        'kode_aset',
+        'tanggal_perolehan',
+    ];
     public $timestamps = false;
+    
+    protected $casts = [
+        'tanggal_perolehan' => 'date',  // atau 'datetime' jika kamu butuh waktu juga
+    ];
 
     public function kategori()
     {
