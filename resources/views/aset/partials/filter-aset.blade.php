@@ -9,7 +9,7 @@
         <label for="kategori" class="form-label">Kategori</label>
         <select name="kategori" id="kategori" class="form-select">
             <option value="">Semua Kategori</option>
-            @foreach ($kategoriList as $kat)
+            @foreach ($kategoris as $kat)
                 <option value="{{ $kat->id }}" {{ request('kategori') == $kat->id ? 'selected' : '' }}>
                     {{ $kat->nama_kategori }}
                 </option>
@@ -21,7 +21,7 @@
         <label for="lokasi" class="form-label">Lokasi</label>
         <select name="lokasi" id="lokasi" class="form-select">
             <option value="">Semua Lokasi</option>
-            @foreach ($lokasiList as $lok)
+            @foreach ($lokasis as $lok)
                 <option value="{{ $lok->id }}" {{ request('lokasi') == $lok->id ? 'selected' : '' }}>
                     {{ $lok->nama_lokasi }}
                 </option>

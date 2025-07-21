@@ -2,13 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AsetController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LokasiController;
 
-Route::get('/aset', [AsetController::class, 'aset'])->name('aset.aset');
-Route::get('/aset/create', [AsetController::class, 'create'])->name('aset.create');
-Route::post('/aset', [AsetController::class, 'store'])->name('aset.store');
-Route::get('/aset/{aset}', [AsetController::class, 'show'])->name('aset.show');
-Route::get('/aset/{aset}/edit', [AsetController::class, 'edit'])->name('aset.edit');
-Route::put('/aset/{aset}', [AsetController::class, 'update'])->name('aset.update');
-Route::delete('/aset/{aset}', [AsetController::class, 'destroy'])->name('aset.destroy');
-Route::get('/aset/mutasi', [AsetController::class, 'mutasi'])->name('aset.mutasi');
-Route::resource('aset', AsetController::class)->only(['edit', 'update']);
+Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+Route::post('/lokasi', [LokasiController::class, 'store'])->name('lokasi.store');
+Route::put('/lokasi/{id}', [LokasiController::class, 'update'])->name('lokasi.update');
+Route::delete('/lokasi/{id}', [LokasiController::class, 'destroy'])->name('lokasi.destroy');
+
+// Dashboard (Home)
+Route::get('/', [DashboardController::class, 'index'])->name('home');
+// Aset routes
+Route::prefix('aset')->name('aset.')->controller(AsetController::class)->group(function () {
+    Route::get('/', 'aset')->name('aset');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{aset}/edit', 'edit')->name('edit');
+    Route::put('/{aset}', 'update')->name('update');
+    Route::delete('/{aset}', 'destroy')->name('destroy');
+
+    // Mutasi routes
+    Route::get('/mutasi', 'mutasi')->name('mutasi');
+    Route::get('/mutasi/export', 'export')->name('mutasi.export');
+});
